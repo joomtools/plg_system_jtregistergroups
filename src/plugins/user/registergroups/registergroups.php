@@ -106,24 +106,9 @@ class PlgUserRegistergroups extends JPlugin
 				}
 			}
 
-			if (!JHtml::isRegistered('users.url'))
+			if (!JHtml::isRegistered('users.groups'))
 			{
-				JHtml::register('users.url', array(__CLASS__, 'url'));
-			}
-
-			if (!JHtml::isRegistered('users.calendar'))
-			{
-				JHtml::register('users.calendar', array(__CLASS__, 'calendar'));
-			}
-
-			if (!JHtml::isRegistered('users.tos'))
-			{
-				JHtml::register('users.tos', array(__CLASS__, 'tos'));
-			}
-
-			if (!JHtml::isRegistered('users.dob'))
-			{
-				JHtml::register('users.dob', array(__CLASS__, 'dob'));
+				JHtml::register('users.groups', array(__CLASS__, 'url'));
 			}
 		}
 
