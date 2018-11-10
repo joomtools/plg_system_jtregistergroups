@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="plugin" group="user" method="upgrade">
+	<name>plg_system_jtregistergroups</name>
+	<author>Guido De Gobbis</author>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) JoomTools. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>support@joomtools.de</authorEmail>
+	<authorUrl>joomtools.de</authorUrl>
+	<version>1.0.0-dev</version>
+	<description>PLG_SYSTEM_JTREGISTERGROUPS_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="jtregistergroups">jtregistergroups.php</filename>
+		<folder>registergroupss</folder>
+		<folder>field</folder>
+	</files>
+	<languages folder="language">
+		<language tag="de-DE">de-DE.plg_system_jtregistergroups.ini</language>
+		<language tag="de-DE">de-DE.plg_system_jtregistergroups.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_system_jtregistergroups.ini</language>
+		<language tag="en-GB">en-GB.plg_system_jtregistergroups.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/plugins/system/jtregistergroups/fields">
+				<field name="subform"
+				       type="subform"
+				       label="PLG_SYSTEM_JTREGISTERGROUPS_SUBFORM_LABEL"
+				       description="PLG_SYSTEM_JTREGISTERGROUPS_SUBFORM_DESC"
+				       required="true"
+				       layout="joomla.form.field.subform.repeatable"
+				       min="1"
+				>
+					<form>
+						<field
+								name="new_usertype"
+								type="usergrouplist"
+								label="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_LABEL"
+								description="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_DESC"
+								default="0"
+								checksuperusergroup="1"
+								multiple="true"
+						/>
+
+						<field
+								name="fields_group"
+								type="fieldsgrouplist"
+								label="Fieldsgruppe"
+								description="Fieldsgruppe Beschreibung"
+						/>
+					</form>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
