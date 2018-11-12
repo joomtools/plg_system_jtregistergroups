@@ -10,8 +10,8 @@
 
 defined('JPATH_PLATFORM') or die;
 //jimport('joomla.form.helper');
-include_once JPATH_ADMINISTRATOR . "/components/com_fields/helpers/fields.php";
-
+//include_once JPATH_ADMINISTRATOR . "/components/com_fields/helpers/fields.php";
+jimport(JPATH_ADMINISTRATOR . "/components/com_fields/helpers/fields.php");
 /**
  * Form Field class for the Joomla Platform.
  * Supports a one line text field.

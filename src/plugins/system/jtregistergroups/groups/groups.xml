@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields name="params">
-		<fieldset name="registergroups">
+		<fieldset name="basic">
 			<field
 					name="new_usertype"
 					type="usergrouplist"
 					label="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_LABEL"
 					description="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_DESC"
-					default="2"
+					default="0"
 					checksuperusergroup="1"
 			/>
 		</fieldset>

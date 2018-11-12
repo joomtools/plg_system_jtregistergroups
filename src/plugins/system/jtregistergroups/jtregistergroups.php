@@ -9,8 +9,6 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\Utilities\ArrayHelper;
-
 /**
  * An example custom profile plugin.
  *
@@ -19,17 +17,24 @@ use Joomla\Utilities\ArrayHelper;
 class PlgSystemJtregistergroups extends JPlugin
 {
 	/**
+	 * Formname
+	 *
+	 * @var     string
+	 * @since   1.0.0
+	 */
+	private $formName = null;
+	/**
 	 * Global application object
 	 *
 	 * @var     JApplication
-	 * @since   3.0.0
+	 * @since   1.0.0
 	 */
 	protected $app = null;
 	/**
 	 * Load the language file on instantiation.
 	 *
 	 * @var    boolean
-	 * @since  3.1
+	 * @since  1.0.0
 	 */
 	protected $autoloadLanguage = true;
 
@@ -40,8 +45,7 @@ class PlgSystemJtregistergroups extends JPlugin
 	 * @param   object  $data     An object containing the data for the form.
 	 *
 	 * @return  boolean
-	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function onContentPrepareData($context, $data)
 	{
@@ -58,21 +62,38 @@ class PlgSystemJtregistergroups extends JPlugin
 
 		if ($context == 'com_users.registration')
 		{
-			$menuItem = (int) $this->app->getMenu()->getActive()->id;
+			$newUserGroup = $this->getMenuGroup();
+			$newUserGroup = !is_array($newUserGroup) ? array($newUserGroup) : $newUserGroup;
 
-			if ($menuItem)
+			if (!empty($newUserGroup))
 			{
-				$newUserGroup = $this->app->getMenu()->getItem($menuItem)->getParams()->get('new_usertype');
-
-				$data->groups[0] = $newUserGroup;
-
-				return true;
+				$data->groups = $newUserGroup;
+//				$this->onAfterDispatch();
 			}
+
+			return true;
 		}
 
-		return false;
+		return true;
 	}
 
+	/**
+	 * Get group set in menuitem
+	 *
+	 * @return   string|null  Selected group
+	 * @since    1.0.0
+	 */
+	private function getMenuGroup()
+	{
+		$menuItem = (int) $this->app->getMenu()->getActive()->id;
+
+		if ($menuItem)
+		{
+			return $this->app->getMenu()->getItem($menuItem)->getParams()->get('new_usertype');
+		}
+
+		return null;
+	}
 	/**
 	 * Adds additional fields to the user editing form
 	 *
@@ -87,41 +108,89 @@ class PlgSystemJtregistergroups extends JPlugin
 	{
 		$name = $form->getName();
 
-		if ($name =='com_menus.item' && $data->link == 'index.php?option=com_users&view=registration')
+		if ($name =='com_menus.item' && $data->link == 'index.php?option=com_users&view=registration'
+			|| $name == 'com_fields.field.com_users.user')
 		{
 			$this->setGroupToMenuItem($form);
+		}
+
+		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
+		{
+			$this->formName = $name;
 		}
 
 		return true;
 	}
 
 	/**
-	 * Method is called before user data is stored in the database
+	 * Remove not needed custom fields
 	 *
-	 * @param   array    $user   Holds the old user data.
-	 * @param   boolean  $isnew  True if a new user is stored.
-	 * @param   array    $data   Holds the new user data.
-	 *
-	 * @return  boolean
-	 *
-	 * @since   3.1
-	 * @throws  InvalidArgumentException on invalid date.
+	 * @return   void
+	 * @since    1.0.0
 	 */
-	public function onUserBeforeSave($user, $isnew, $data)
+	public function onCustomFieldsPrepareDom($field, $fieldset, $form)
 	{
-/*		$menuItem = (int) $this->app->getMenu()->getActive()->id;
+		$name = $form->getName();
+		$test = null;
 
-		if ($menuItem && $isnew)
+		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
 		{
-			$newUserGroup = $this->app->getMenu()->getItem($menuItem)->getParams()->get('new_usertype');
+			if ($name == 'com_users.registration')
+			{
+				$newUserGroup = $this->getMenuGroup();
+			}
 
-			$data['groups'][0] = $newUserGroup;
+			$fieldGroup = (array) $field->params->get('new_usertype');
 
-			return true;
+			if (!empty($fieldGroup) && !in_array($newUserGroup, $fieldGroup))
+			{
+//					$form->removeField($field->name, 'com_fields');
+				$field->type = '';
+			}
 		}
+	}
 
-		return false;
-*/
+
+	/**
+	 * Remove not needed custom fields
+	 *
+	 * @return   void
+	 * @since    1.0.0
+	 */
+	public function onAfterDispatch()
+	{
+		return;
+		$name = $this->formName;
+		$form = JForm::getInstance($name);
+
+		$test = null;
+		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
+		{
+			$fields = $this->getCustomFields();
+
+			foreach ($fields as $key => $field)
+			{
+				if ($name == 'com_users.registration')
+				{
+					$newUserGroup = $this->getMenuGroup();
+				}
+
+				if ($field->params->get('new_usertype') != $newUserGroup)
+				{
+					$form->removeField($field->name, 'com_fields');
+//					$field = new stdClass;
+				}
+
+				/*				$groupModel = JModelLegacy::getInstance('Group', 'FieldsModel', array('ignore_request' => true));
+								$groupItem = $groupModel->getItem($field->group_id);
+
+								if ($groupItem->state == 1)
+								{
+									$fieldGroups[$key]['id'] = $groupItem->id;
+									$fieldGroups[$key]['title'] = $groupItem->title;
+								}*/
+			}
+		}
 	}
 
 	/**
@@ -133,7 +202,24 @@ class PlgSystemJtregistergroups extends JPlugin
 	 */
 	private function setGroupToMenuItem(JForm $form): void
 	{
+		$name = $form->getName();
+
 		JForm::addFormPath(__DIR__ . '/groups');
 		$form->loadFile('groups');
+
+		if ($name == 'com_fields.field.com_users.user')
+		{
+			$form->setFieldAttribute('new_usertype', 'multiple', 'true', 'params');
+		}
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getCustomFields(): array
+	{
+		jimport('fields', JPATH_ADMINISTRATOR . '/components/com_fields/helpers');
+
+		return FieldsHelper::getFields('com_users.user');
 	}
 }
