@@ -4,10 +4,10 @@
 	<author>Guido De Gobbis</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) JoomTools. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>support@joomtools.de</authorEmail>
 	<authorUrl>joomtools.de</authorUrl>
-	<version>1.0.0-dev</version>
+	<version>##VERSION##</version>
 	<description>PLG_SYSTEM_JTREGISTERGROUPS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="jtregistergroups">jtregistergroups.php</filename>
