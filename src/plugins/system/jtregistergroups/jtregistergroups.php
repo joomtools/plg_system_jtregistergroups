@@ -9,6 +9,9 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\User\UserHelper;
+use Joomla\CMS\Factory;
+
 /**
  * An example custom profile plugin.
  *
@@ -55,20 +58,13 @@ class PlgSystemJtregistergroups extends JPlugin
 			return true;
 		}
 
-		if (in_array($context, array('com_users.profile', 'com_users.user', 'com_admin.profile')))
-		{
-
-		}
-
 		if ($context == 'com_users.registration')
 		{
-			$newUserGroup = $this->getMenuGroup();
-			$newUserGroup = !is_array($newUserGroup) ? array($newUserGroup) : $newUserGroup;
+			$newUserGroup = (array) $this->getMenuGroup();
 
 			if (!empty($newUserGroup))
 			{
 				$data->groups = $newUserGroup;
-//				$this->onAfterDispatch();
 			}
 
 			return true;
@@ -94,6 +90,26 @@ class PlgSystemJtregistergroups extends JPlugin
 
 		return null;
 	}
+
+	/**
+	 * Get group set in menuitem
+	 *
+	 * @param   string  $context  The context for the data
+	 *
+	 * @return   array  Selected group
+	 * @since    1.0.0
+	 */
+	private function getUserGroups($context)
+	{
+		$userId = (int) $this->app->input->get('id');
+
+		if ($context == 'com_users.profile')
+		{
+			$userId = (int) Factory::getUser()->id;
+		}
+
+		return (array) UserHelper::getUserGroups($userId);
+	}
 	/**
 	 * Adds additional fields to the user editing form
 	 *
@@ -108,10 +124,19 @@ class PlgSystemJtregistergroups extends JPlugin
 	{
 		$name = $form->getName();
 
-		if ($name =='com_menus.item' && $data->link == 'index.php?option=com_users&view=registration'
-			|| $name == 'com_fields.field.com_users.user')
+		if ($name =='com_menus.item'
+			&& (!empty($data->link) && $data->link == 'index.php?option=com_users&view=registration'))
 		{
-			$this->setGrouplistToMenuItem($form);
+			JForm::addFormPath(__DIR__ . '/xml');
+			$form->loadFile('register_group');
+//			$this->loadAllowedGroupsToMenuItem($form);
+		}
+
+		if ($name == 'com_fields.field.com_users.user')
+		{
+			JForm::addFormPath(__DIR__ . '/xml');
+			$form->loadFile('fields_groups');
+//			$this->loadAllowedGroupsToMenuItem($form);
 		}
 
 		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
@@ -131,23 +156,48 @@ class PlgSystemJtregistergroups extends JPlugin
 	public function onCustomFieldsPrepareDom($field, $fieldset, $form)
 	{
 		$name = $form->getName();
-		$test = null;
+		$groupFound = false;
 
 		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
 		{
+			$fieldGroups = (array) $field->params->get('fields_groups');
+
+			if (empty($fieldGroups))
+			{
+				return;
+			}
+
 			if ($name == 'com_users.registration')
 			{
 				$newUserGroup = $this->getMenuGroup();
+
+				if (in_array($newUserGroup, $fieldGroups))
+				{
+					$groupFound = true;
+				}
 			}
-
-			$fieldGroup = (array) $field->params->get('new_usertype');
-
-			if (!empty($fieldGroup) && !in_array($newUserGroup, $fieldGroup))
+			else
 			{
-//					$form->removeField($field->name, 'com_fields');
-				$field->type = '';
+				$userGroups = (array) $this->getUserGroups($name);
+
+				foreach ($userGroups as $userGroup)
+				{
+					if (in_array($userGroup, $fieldGroups))
+					{
+						$groupFound = true;
+					}
+				}
 			}
+
+			if ($groupFound)
+			{
+				return;
+			}
+
+			$field->type = '';
 		}
+
+		return;
 	}
 
 
@@ -200,7 +250,7 @@ class PlgSystemJtregistergroups extends JPlugin
 	 *
 	 * @since   1.0.0
 	 */
-	private function setGrouplistToMenuItem(JForm $form): void
+	private function loadAllowedGroupsToMenuItem(JForm $form): void
 	{
 		JForm::addFormPath(__DIR__ . '/xml');
 		$form->loadFile('register_group');

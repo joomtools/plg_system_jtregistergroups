@@ -8,7 +8,6 @@
 					label="PLG_SYSTEM_JTREGISTERGROUPS_REGISTER_GROUP_LABEL"
 					description="PLG_SYSTEM_JTREGISTERGROUPS_REGISTER_GROUP_DESCRIPTION"
 					default="0"
-					useglobal="true"
 			/>
 		</fieldset>
 	</fields>
