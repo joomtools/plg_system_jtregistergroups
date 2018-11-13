@@ -22,34 +22,16 @@
 	</languages>
 	<config>
 		<fields name="params">
-			<fieldset name="basic" addfieldpath="/plugins/system/jtregistergroups/fields">
-				<field name="subform"
-				       type="subform"
-				       label="PLG_SYSTEM_JTREGISTERGROUPS_SUBFORM_LABEL"
-				       description="PLG_SYSTEM_JTREGISTERGROUPS_SUBFORM_DESC"
-				       required="true"
-				       layout="joomla.form.field.subform.repeatable"
-				       min="1"
-				>
-					<form>
-						<field
-								name="new_usertype"
-								type="usergrouplist"
-								label="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_LABEL"
-								description="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_DESC"
-								default="0"
-								checksuperusergroup="1"
-								multiple="true"
-						/>
-
-						<field
-								name="fields_group"
-								type="fieldsgrouplist"
-								label="Fieldsgruppe"
-								description="Fieldsgruppe Beschreibung"
-						/>
-					</form>
-				</field>
+			<fieldset name="basic">
+				<field
+						name="set_allowed_usertypes"
+						type="usergrouplist"
+						label="PLG_SYSTEM_JTREGISTERGROUPS_SET_ALLOWED_USERTYPES_LABEL"
+						description="PLG_SYSTEM_JTREGISTERGROUPS_SET_ALLOWED_USERTYPES_DESCRIPTION"
+						default="0"
+						checksuperusergroup="1"
+						multiple="true"
+				/>
 			</fieldset>
 		</fields>
 	</config>

@@ -3,12 +3,13 @@
 	<fields name="params">
 		<fieldset name="basic">
 			<field
-					name="new_usertype"
+					name="fields_groups"
 					type="usergrouplist"
-					label="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_LABEL"
-					description="COM_USERS_CONFIG_FIELD_NEW_USER_TYPE_DESC"
+					label="PLG_SYSTEM_JTREGISTERGROUPS_FIELDS_GROUPS_LABEL"
+					description="PLG_SYSTEM_JTREGISTERGROUPS_FIELDS_GROUPS_DESCRIPTION"
 					default="0"
 					checksuperusergroup="1"
+					multiple="true"
 			/>
 		</fieldset>
 	</fields>

@@ -89,7 +89,7 @@ class PlgSystemJtregistergroups extends JPlugin
 
 		if ($menuItem)
 		{
-			return $this->app->getMenu()->getItem($menuItem)->getParams()->get('new_usertype');
+			return $this->app->getMenu()->getItem($menuItem)->getParams()->get('register_group');
 		}
 
 		return null;
@@ -111,7 +111,7 @@ class PlgSystemJtregistergroups extends JPlugin
 		if ($name =='com_menus.item' && $data->link == 'index.php?option=com_users&view=registration'
 			|| $name == 'com_fields.field.com_users.user')
 		{
-			$this->setGroupToMenuItem($form);
+			$this->setGrouplistToMenuItem($form);
 		}
 
 		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration', 'com_admin.profile')))
@@ -194,23 +194,16 @@ class PlgSystemJtregistergroups extends JPlugin
 	}
 
 	/**
-	 * Add groups field to menu item
+	 * Add allowed groups field to menu item
 	 *
 	 * @param   \JForm  $form
 	 *
 	 * @since   1.0.0
 	 */
-	private function setGroupToMenuItem(JForm $form): void
+	private function setGrouplistToMenuItem(JForm $form): void
 	{
-		$name = $form->getName();
-
-		JForm::addFormPath(__DIR__ . '/groups');
-		$form->loadFile('groups');
-
-		if ($name == 'com_fields.field.com_users.user')
-		{
-			$form->setFieldAttribute('new_usertype', 'multiple', 'true', 'params');
-		}
+		JForm::addFormPath(__DIR__ . '/xml');
+		$form->loadFile('register_group');
 	}
 
 	/**
