@@ -12,6 +12,7 @@
 	<files>
 		##FILES##
 	</files>
+	<scriptfile>script.php</scriptfile>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
