@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.8" type="plugin" group="user" method="upgrade">
-	<name>plg_system_jtregistergroups</name>
+	<name>PLG_SYSTEM_JTREGISTERGROUPS</name>
 	<author>Guido De Gobbis</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) JoomTools. All rights reserved.</copyright>
@@ -33,4 +33,7 @@
 			</fieldset>
 		</fields>
 	</config>
+	<updateservers>
+		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/JoomTools/plg_system_jtregistergroups/master/update.xml</server>
+	</updateservers>
 </extension>

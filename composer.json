@@ -1,6 +1,6 @@
 {
-  "name"       : "JoomTools/plg_system_registergroups",
-  "description": "System - Register User with group",
+  "name"       : "JoomTools/plg_system_jtregistergroups",
+  "description": "Register User with group",
   "license"    : "GPL-3+",
   "require"    : {
     "php": ">=7.1"
