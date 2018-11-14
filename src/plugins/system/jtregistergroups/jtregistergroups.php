@@ -65,7 +65,7 @@ class PlgSystemJtregistergroups extends JPlugin
 
 			if (!empty($newUserGroup))
 			{
-				$data->groups = $newUserGroup;
+				$data->groups = (array) $newUserGroup;
 			}
 		}
 	}
