@@ -14,9 +14,10 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\User\UserHelper;
 
 /**
- * An example custom profile plugin.
+ * Class to register user to selected group
+ * using individual custom field for each group
  *
- * @since  1.6
+ * @since   1.0.0
  */
 class PlgSystemJtregistergroups extends JPlugin
 {
@@ -30,8 +31,8 @@ class PlgSystemJtregistergroups extends JPlugin
 	/**
 	 * Load the language file on instantiation.
 	 *
-	 * @var    boolean
-	 * @since  1.0.0
+	 * @var     boolean
+	 * @since   1.0.0
 	 */
 	protected $autoloadLanguage = true;
 
@@ -41,18 +42,16 @@ class PlgSystemJtregistergroups extends JPlugin
 	 * @param   string  $context  The context for the data
 	 * @param   object  $data     An object containing the data for the form.
 	 *
-	 * @return  boolean
-	 * @since   1.0.0
+	 * @return   void
+	 * @since    1.0.0
 	 */
 	public function onContentPrepareData($context, $data)
 	{
-		// Check we are manipulating a valid form.
 		if (!in_array($context, array('com_users.registration', 'com_admin.profile')))
 		{
-			return true;
+			return;
 		}
 
-		// Redirect com_admin.profile to com_users.user
 		if ($context == 'com_admin.profile')
 		{
 			$userId = (int) Factory::getUser()->id;
@@ -62,17 +61,13 @@ class PlgSystemJtregistergroups extends JPlugin
 
 		if ($context == 'com_users.registration')
 		{
-			$newUserGroup = (array) $this->getMenuGroup();
+			$newUserGroup = $this->getMenuGroup();
 
 			if (!empty($newUserGroup))
 			{
 				$data->groups = $newUserGroup;
 			}
-
-			return true;
 		}
-
-		return true;
 	}
 
 	/**
@@ -81,9 +76,8 @@ class PlgSystemJtregistergroups extends JPlugin
 	 * @param   JForm  $form  The form to be altered.
 	 * @param   mixed  $data  The associated data for the form.
 	 *
-	 * @return  boolean
-	 *
-	 * @since   1.6
+	 * @return   void
+	 * @since    1.0.0
 	 */
 	public function onContentPrepareForm(JForm $form, $data)
 	{
@@ -101,8 +95,6 @@ class PlgSystemJtregistergroups extends JPlugin
 			JForm::addFormPath(__DIR__ . '/xml');
 			$form->loadFile('fields_groups');
 		}
-
-		return true;
 	}
 
 	/**
@@ -116,52 +108,52 @@ class PlgSystemJtregistergroups extends JPlugin
 		$name       = $form->getName();
 		$groupFound = false;
 
-		if (in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration')))
+		if (!in_array($name, array('com_users.profile', 'com_users.user', 'com_users.registration')))
 		{
-			$fieldGroups = (array) $field->params->get('fields_groups');
+			return;
+		}
 
-			if (empty($fieldGroups))
+		$fieldGroups = (array) $field->params->get('fields_groups');
+
+		if (empty($fieldGroups))
+		{
+			return;
+		}
+
+		if ($name == 'com_users.registration')
+		{
+			$newUserGroup = $this->getMenuGroup();
+
+			if (in_array($newUserGroup, $fieldGroups))
 			{
-				return;
+				$groupFound = true;
 			}
+		}
+		else
+		{
+			$userGroups = (array) $this->getUserGroups($name);
 
-			if ($name == 'com_users.registration')
+			foreach ($userGroups as $userGroup)
 			{
-				$newUserGroup = $this->getMenuGroup();
-
-				if (in_array($newUserGroup, $fieldGroups))
+				if (in_array($userGroup, $fieldGroups))
 				{
 					$groupFound = true;
 				}
 			}
-			else
-			{
-				$userGroups = (array) $this->getUserGroups($name);
-
-				foreach ($userGroups as $userGroup)
-				{
-					if (in_array($userGroup, $fieldGroups))
-					{
-						$groupFound = true;
-					}
-				}
-			}
-
-			if ($groupFound)
-			{
-				return;
-			}
-
-			$field->type = '';
 		}
 
-		return;
+		if ($groupFound)
+		{
+			return;
+		}
+
+		$field->type = '';
 	}
 
 	/**
 	 * Get group set in menuitem
 	 *
-	 * @return   string|null  Selected group
+	 * @return   null|string  Selected group
 	 * @since    1.0.0
 	 */
 	private function getMenuGroup()
@@ -177,11 +169,11 @@ class PlgSystemJtregistergroups extends JPlugin
 	}
 
 	/**
-	 * Get group set in menuitem
+	 * Get groups set to users
 	 *
 	 * @param   string  $context  The context for the data
 	 *
-	 * @return   array  Selected group
+	 * @return   array  Selected groups
 	 * @since    1.0.0
 	 */
 	private function getUserGroups($context)

@@ -33,7 +33,7 @@ class AllowedgroupsField extends \JFormFieldList
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  11.1
+	 * @since  1.0.0
 	 */
 	protected $type = 'Allowedgroups';
 
@@ -41,9 +41,8 @@ class AllowedgroupsField extends \JFormFieldList
 	/**
 	 * Method to get the field options.
 	 *
-	 * @return  array  The field option objects.
-	 *
-	 * @since   3.7.0
+	 * @return   array  The field option objects.
+	 * @since    1.0.0
 	 */
 	protected function getOptions()
 	{

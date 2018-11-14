@@ -6,7 +6,7 @@
 	<copyright>(C) JoomTools. All rights reserved.</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>support@joomtools.de</authorEmail>
-	<authorUrl>joomtools.de</authorUrl>
+	<authorUrl>https://github.com/JoomTools/plg_system_jtregistergroups</authorUrl>
 	<version>##VERSION##</version>
 	<description>PLG_SYSTEM_JTREGISTERGROUPS_XML_DESCRIPTION</description>
 	<files>
