@@ -10,9 +10,7 @@
 	<version>##VERSION##</version>
 	<description>PLG_SYSTEM_JTREGISTERGROUPS_XML_DESCRIPTION</description>
 	<files>
-		<filename plugin="jtregistergroups">jtregistergroups.php</filename>
-		<folder>registergroupss</folder>
-		<folder>field</folder>
+		##FILES##
 	</files>
 	<languages folder="language">
 		<language tag="de-DE">de-DE.plg_system_jtregistergroups.ini</language>
