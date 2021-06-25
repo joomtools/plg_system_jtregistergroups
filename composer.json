@@ -3,7 +3,7 @@
   "description": "Register User with group",
   "license"    : "GPL-3+",
   "require"    : {
-    "php": ">=7.1"
+    "php": ">=7.3"
   },
   "repositories": [
     {

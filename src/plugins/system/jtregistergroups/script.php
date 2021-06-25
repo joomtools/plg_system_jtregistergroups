@@ -10,6 +10,10 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\Installer\Installer;
+use Joomla\CMS\Language\Text;
+
 /**
  * Script file of Joomla CMS
  *
@@ -25,34 +29,34 @@ class PlgSystemJtregistergroupsInstallerScript
 	public function __construct()
 	{
 		// Define the minumum versions to be supported.
-		$this->minimumJoomla = '3.8';
-		$this->minimumPhp    = '7.1';
+		$this->minimumJoomla = '3.9';
+		$this->minimumPhp    = '7.3';
 	}
 
 	/**
 	 * Function to act prior to installation process begins
 	 *
 	 * @param   string      $action     Which action is happening (install|uninstall|discover_install|update)
-	 * @param   JInstaller  $installer  The class calling this method
+	 * @param   Installer  $installer  The class calling this method
 	 *
 	 * @return   boolean  True on success
 	 * @since    1.0.0
 	 */
-	public function preflight($action, $installer)
+	public function preflight($action, Installer $installer)
 	{
-		$app = JFactory::getApplication();
-		JFactory::getLanguage()->load('plg_content_jteasylaw', dirname(__FILE__));
+		$app = Factory::getApplication();
+		Factory::getLanguage()->load('plg_content_jteasylaw', dirname(__FILE__));
 
 		if (version_compare(PHP_VERSION, $this->minimumPhp, 'lt'))
 		{
-			$app->enqueueMessage(JText::_('PLG_SYSTEM_JTREGISTERGROUPS_MINPHPVERSION'), 'error');
+			$app->enqueueMessage(Text::_('PLG_SYSTEM_JTREGISTERGROUPS_MINPHPVERSION'), 'error');
 
 			return false;
 		}
 
 		if (version_compare(JVERSION, $this->minimumJoomla, 'lt'))
 		{
-			$app->enqueueMessage(JText::_('PLG_SYSTEM_JTREGISTERGROUPS_MINJVERSION'), 'error');
+			$app->enqueueMessage(Text::_('PLG_SYSTEM_JTREGISTERGROUPS_MINJVERSION'), 'error');
 
 			return false;
 		}
