@@ -19,7 +19,10 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\Registry\Registry;
 use Joomla\CMS\Plugin\PluginHelper;
 
-FormHelper::loadFieldClass('list');
+if (version_compare(JVERSION, '4', 'lt'))
+{
+	FormHelper::loadFieldClass('list');
+}
 
 /**
  * Class to show allowed groups in menu item
@@ -63,7 +66,11 @@ class AllowedgroupsField extends \JFormFieldList
 
 		foreach ($allowedGroups as $allowed)
 		{
-			$group     = $groups->get($allowed);
+			if (!$group = $groups->get($allowed))
+			{
+				continue;
+			}
+
 			$options[] = (object) array(
 				'text'  => $group->title,
 				'value' => $group->id,
