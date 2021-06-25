@@ -1,5 +1,5 @@
 {
-  "name"       : "JoomTools/plg_system_jtregistergroups",
+  "name"       : "joomtools/plg_system_jtregistergroups",
   "description": "Register User with group",
   "license"    : "GPL-3+",
   "require"    : {
