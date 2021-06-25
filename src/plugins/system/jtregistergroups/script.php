@@ -42,7 +42,7 @@ class PlgSystemJtregistergroupsInstallerScript
 	 * @return   boolean  True on success
 	 * @since    1.0.0
 	 */
-	public function preflight($action, Installer $installer)
+	public function preflight($action, $installer)
 	{
 		$app = Factory::getApplication();
 		Factory::getLanguage()->load('plg_content_jteasylaw', dirname(__FILE__));
