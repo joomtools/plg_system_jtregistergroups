@@ -10,7 +10,10 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Application\CMSApplication;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\Form;
+use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\User\UserHelper;
 
 /**
@@ -19,12 +22,12 @@ use Joomla\CMS\User\UserHelper;
  *
  * @since   1.0.0
  */
-class PlgSystemJtregistergroups extends JPlugin
+class PlgSystemJtregistergroups extends CMSPlugin
 {
 	/**
 	 * Global application object
 	 *
-	 * @var     JApplication
+	 * @var     CMSApplication
 	 * @since   1.0.0
 	 */
 	protected $app = null;
@@ -73,26 +76,29 @@ class PlgSystemJtregistergroups extends JPlugin
 	/**
 	 * Adds additional fields to the user editing form
 	 *
-	 * @param   JForm  $form  The form to be altered.
+	 * @param   Form  $form  The form to be altered.
 	 * @param   mixed  $data  The associated data for the form.
 	 *
 	 * @return   void
 	 * @since    1.0.0
 	 */
-	public function onContentPrepareForm(JForm $form, $data)
+	public function onContentPrepareForm(Form $form, $data)
 	{
 		$name = $form->getName();
 
 		if ($name =='com_menus.item'
 			&& (!empty($data->link) && $data->link == 'index.php?option=com_users&view=registration'))
 		{
-			JForm::addFormPath(__DIR__ . '/xml');
+			Form::addFormPath(__DIR__ . '/xml');
+			Form::addFieldPath(__DIR__ . '/fields');
+			JLoader::registerAlias('JFormRuleAllowedgroups', '\\Joomla\\CMS\\Form\\Rule\\AllowedgroupsRule');
+			Form::addRulePath(__DIR__ . '/rules');
 			$form->loadFile('register_group');
 		}
 
 		if ($name == 'com_fields.field.com_users.user')
 		{
-			JForm::addFormPath(__DIR__ . '/xml');
+			Form::addFormPath(__DIR__ . '/xml');
 			$form->loadFile('fields_groups');
 		}
 	}
@@ -185,6 +191,6 @@ class PlgSystemJtregistergroups extends JPlugin
 			$userId = (int) Factory::getUser()->id;
 		}
 
-		return (array) UserHelper::getUserGroups($userId);
+		return UserHelper::getUserGroups($userId);
 	}
 }
