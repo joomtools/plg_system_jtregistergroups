@@ -86,19 +86,22 @@ class PlgSystemJtregistergroups extends CMSPlugin
 	{
 		$name = $form->getName();
 
+		Form::addFormPath(__DIR__ . '/xml');
+
 		if ($name =='com_menus.item'
 			&& (!empty($data->link) && $data->link == 'index.php?option=com_users&view=registration'))
 		{
-			Form::addFormPath(__DIR__ . '/xml');
 			Form::addFieldPath(__DIR__ . '/fields');
-			JLoader::registerAlias('JFormRuleAllowedgroups', '\\Joomla\\CMS\\Form\\Rule\\AllowedgroupsRule');
 			Form::addRulePath(__DIR__ . '/rules');
+
+			JLoader::registerNamespace('Joomla\\CMS\\Form\\Field', __DIR__ . '/fields', false, true, 'psr4');
+			JLoader::registerNamespace('Joomla\\CMS\\Form\\Rule', __DIR__ . '/rules', false, true, 'psr4');
+
 			$form->loadFile('register_group');
 		}
 
 		if ($name == 'com_fields.field.com_users.user')
 		{
-			Form::addFormPath(__DIR__ . '/xml');
 			$form->loadFile('fields_groups');
 		}
 	}
