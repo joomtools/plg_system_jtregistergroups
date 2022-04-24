@@ -94,8 +94,8 @@ class PlgSystemJtregistergroups extends CMSPlugin
 			Form::addFieldPath(__DIR__ . '/fields');
 			Form::addRulePath(__DIR__ . '/rules');
 
-			JLoader::registerNamespace('Joomla\\CMS\\Form\\Field', __DIR__ . '/fields', false, true, 'psr4');
-			JLoader::registerNamespace('Joomla\\CMS\\Form\\Rule', __DIR__ . '/rules', false, true, 'psr4');
+			\JLoader::registerNamespace('Joomla\\CMS\\Form\\Field', __DIR__ . '/fields', false, true, 'psr4');
+			\JLoader::registerNamespace('Joomla\\CMS\\Form\\Rule', __DIR__ . '/rules', false, true, 'psr4');
 
 			$form->loadFile('register_group');
 		}

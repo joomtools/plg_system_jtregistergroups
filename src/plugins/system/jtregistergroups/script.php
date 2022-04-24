@@ -30,7 +30,7 @@ class PlgSystemJtregistergroupsInstallerScript
 	{
 		// Define the minumum versions to be supported.
 		$this->minimumJoomla = '3.9';
-		$this->minimumPhp    = '7.3';
+		$this->minimumPhp    = '7.2';
 	}
 
 	/**
