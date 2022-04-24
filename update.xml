@@ -7,11 +7,35 @@
 		<type>plugin</type>
 		<folder>system</folder>
 		<client>site</client>
-		<version>1.0.3</version>
+		<version>1.0.4</version>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/joomtools/plg_system_jtregistergroups/releases/download/1.0.3/plg_system_jtregistergroups-1.0.3.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/joomtools/plg_system_jtregistergroups/releases/download/1.0.4/plg_system_jtregistergroups-1.0.4.zip</downloadurl>
 		</downloads>
 		<maintainer>Guido De Gobbis</maintainer>
 		<targetplatform name="joomla" version="3.(9|10)"/>
+	</update>
+	<update>
+		<name>JT - Registergroups</name>
+		<description></description>
+		<element>jtregistergroups</element>
+		<type>plugin</type>
+		<folder>system</folder>
+		<client>site</client>
+		<version>1.0.4</version>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/joomtools/plg_system_jtregistergroups/releases/download/1.0.4/plg_system_jtregistergroups-1.0.4.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>alpha</tag>
+			<tag>beta</tag>
+			<tag>rc</tag>
+			<tag>stable</tag>
+		</tags>
+		<sha256>89d4b9efb8c083da43988a0f2ad048264d5840595f0e0dca619083277ebc5f42</sha256>
+		<sha384>a01a5cc8b9391107ee7f3c1edf93e6bc11853106f0b792491a0eac750759cb59ce79e96d7cf6c11cbaed58ddb8a8dd38</sha384>
+		<sha512>4335676ecf973b983f18aaf25b5839e084aaa54ee6ffd2e8ea2edf4ba56977e7763fd424635d3f4ba356fe34541ebfed3b30f591bc8a186209d4bb74d3d27b63</sha512>
+		<maintainer>Guido De Gobbis</maintainer>
+		<targetplatform name="joomla" version="4.[1234567890]"/>
+		<php_minimum>7.2</php_minimum>
 	</update>
 </updates>
