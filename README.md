@@ -1,7 +1,7 @@
 # JT -Registergroups
 
 #### Joomla - System-Plugin ([Download](https://github.com/JoomTools/plg_system_jtregistergroups/releases))
-min. Joomla 3.9 + PHP 7.1
+min. Joomla 3.9 + PHP 7.2
 
 ### Beschreibung / Description
 <details>
