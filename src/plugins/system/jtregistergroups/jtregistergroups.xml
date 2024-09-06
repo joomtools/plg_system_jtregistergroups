@@ -29,6 +29,6 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/master/update.xml</server>
+		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/2.0.0/update.xml</server>
 	</updateservers>
 </extension>
