@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.9" type="plugin" group="system" method="upgrade">
+<extension type="plugin" group="system" method="upgrade">
 	<name>PLG_SYSTEM_JTREGISTERGROUPS</name>
 	<author>Guido De Gobbis</author>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) JoomTools. All rights reserved.</copyright>
-	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
+	<copyright>2018 JoomTools. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or later.</license>
 	<authorEmail>support@joomtools.de</authorEmail>
 	<authorUrl>https://github.com/joomtools/plg_system_jtregistergroups</authorUrl>
 	<version>##VERSION##</version>
 	<description>PLG_SYSTEM_JTREGISTERGROUPS_XML_DESCRIPTION</description>
+	<namespace path="src">JoomTools\Plugin\System\JtRegisterGroups</namespace>
 	<files>
 		##FILES##
 	</files>
@@ -22,6 +23,7 @@
 						label="PLG_SYSTEM_JTREGISTERGROUPS_SET_ALLOWED_USERTYPES_LABEL"
 						description="PLG_SYSTEM_JTREGISTERGROUPS_SET_ALLOWED_USERTYPES_DESCRIPTION"
 						default=""
+						size="8"
 						checksuperusergroup="1"
 						multiple="true"
 				/>
@@ -29,6 +31,6 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/2.0.0/update.xml</server>
+		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/2.x/update.xml</server>
 	</updateservers>
 </extension>

@@ -1,29 +1,25 @@
 <?php
 /**
  * @package      Joomla.Plugin
- * @subpackage   System.Jtregistergroups
+ * @subpackage   System.JtRegisterGroups
  *
  * @author       Guido De Gobbis <support@joomtools.de>
  * @copyright    2018 JoomTools.de - All rights reserved.
  * @license      GNU General Public License version 3 or later
  */
 
-namespace Joomla\CMS\Form\Field;
-
-defined('JPATH_PLATFORM') or die;
+namespace JoomTools\Plugin\System\JtRegisterGroups\Field;
 
 use Joomla\CMS\Component\ComponentHelper;
-use Joomla\CMS\Form\FormHelper;
+use Joomla\CMS\Form\Field\ListField;
 use Joomla\CMS\Helper\UserGroupsHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\Registry\Registry;
 
-if (version_compare(JVERSION, '4', 'lt')) {
-    \JLoader::registerAlias('\\Joomla\\CMS\\Form\\Field\\ListField', 'JFormFieldList');
-    \JLoader::applyAliasFor('JFormFieldList');
-    FormHelper::loadFieldClass('list');
-}
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
 /**
  * Class to show allowed groups in menu item
@@ -48,31 +44,32 @@ class AllowedgroupsField extends ListField
      * @since   1.0.0
      */
     protected function getOptions()
+    : array
     {
         $pluginRegisterglobals = PluginHelper::getPlugin('system', 'jtregistergroups');
         $pluginParams          = new Registry($pluginRegisterglobals->params);
         $allowedGroups         = (array) $pluginParams->get('set_allowed_usertypes', '');
         $groups                = UserGroupsHelper::getInstance();
-        $options               = array();
+        $options               = [];
 
         // Set Global
         $userParams       = ComponentHelper::getParams('com_users');
         $globalGroup      = (int) $userParams->get('new_usertype');
         $globalGroupTitle = $groups->get($globalGroup)->title;
-        $options[]        = (object) array(
+        $options[]        = (object) [
             'text'  => Text::_('JGLOBAL_USE_GLOBAL') . ' (' . $globalGroupTitle . ')',
             'value' => 0,
-        );
+        ];
 
         foreach ($allowedGroups as $allowed) {
             if (!$group = $groups->get($allowed)) {
                 continue;
             }
 
-            $options[] = (object) array(
+            $options[] = (object) [
                 'text'  => $group->title,
                 'value' => $group->id,
-            );
+            ];
         }
 
         return $options;

@@ -1,64 +1,130 @@
 <?php
 /**
  * @package      Joomla.Plugin
- * @subpackage   System.Jtregistergroups
+ * @subpackage   System.JtRegisterGroups
  *
  * @author       Guido De Gobbis <support@joomtools.de>
  * @copyright    2018 JoomTools.de - All rights reserved.
  * @license      GNU General Public License version 3 or later
  */
 
-defined('_JEXEC') or die;
-
 use Joomla\CMS\Factory;
-use Joomla\CMS\Installer\Installer;
+use Joomla\CMS\Installer\InstallerAdapter;
+use Joomla\CMS\Installer\InstallerScriptInterface;
 use Joomla\CMS\Language\Text;
 
+// phpcs:disable PSR1.Files.SideEffects
+\defined('JPATH_PLATFORM') or die;
+// phpcs:enable PSR1.Files.SideEffects
+
 /**
- * Script file of Joomla CMS
+ * Installer script file.
  *
- * @since  1.0.0
+ * @since  2.0.0
  */
-class PlgSystemJtregistergroupsInstallerScript
-{
+return new class () implements InstallerScriptInterface {
     /**
-     * Extension script constructor.
+     * Minimum Joomla version to install
      *
-     * @since  1.0.0
+     * @var    string
+     * @since  2.0.0
      */
-    public function __construct()
+    private string $minimumJoomla = '5';
+
+    /**
+     * Minimum PHP version to install
+     *
+     * @var    string
+     * @since  2.0.0
+     */
+    private string $minimumPhp = '8.1';
+
+    /**
+     * Function called after the extension is installed.
+     *
+     * @param   InstallerAdapter  $adapter  The adapter calling this method
+     *
+     * @return  boolean  True on success
+     *
+     * @since   2.0.0
+     */
+    public function install(InstallerAdapter $adapter)
+    : bool
     {
-        // Define the minumum versions to be supported.
-        $this->minimumJoomla = '3.9';
-        $this->minimumPhp    = '7.2';
+        return true;
     }
 
     /**
-     * Function to act prior to installation process begins
+     * Function called after the extension is updated.
      *
-     * @param   string     $action     Which action is happening (install|uninstall|discover_install|update)
-     * @param   Installer  $installer  The class calling this method
+     * @param   InstallerAdapter  $adapter  The adapter calling this method
      *
      * @return  boolean  True on success
-     * @since   1.0.0
+     *
+     * @since   2.0.0
      */
-    public function preflight($action, $installer)
+    public function update(InstallerAdapter $adapter)
+    : bool
     {
-        $app = Factory::getApplication();
-        Factory::getLanguage()->load('plg_content_jteasylaw', dirname(__FILE__));
+        return true;
+    }
 
-        if (version_compare(PHP_VERSION, $this->minimumPhp, 'lt')) {
-            $app->enqueueMessage(Text::_('PLG_SYSTEM_JTREGISTERGROUPS_MINPHPVERSION'), 'error');
+    /**
+     * Function called after the extension is uninstalled.
+     *
+     * @param   InstallerAdapter  $adapter  The adapter calling this method
+     *
+     * @return  boolean  True on success
+     *
+     * @since   2.0.0
+     */
+    public function uninstall(InstallerAdapter $adapter)
+    : bool
+    {
+        return true;
+    }
+
+    /**
+     * Function called before extension installation/update/removal procedure commences.
+     *
+     * @param   string            $type     The type of change (install or discover_install, update, uninstall)
+     * @param   InstallerAdapter  $adapter  The adapter calling this method
+     *
+     * @return  boolean  True on success
+     *
+     * @since   2.0.0
+     */
+    public function preflight(string $type, InstallerAdapter $adapter)
+    : bool
+    {
+        if (version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
+            Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_PHP'), $this->minimumPhp), 'error');
 
             return false;
         }
 
-        if (version_compare(JVERSION, $this->minimumJoomla, 'lt')) {
-            $app->enqueueMessage(Text::_('PLG_SYSTEM_JTREGISTERGROUPS_MINJVERSION'), 'error');
+        if (version_compare(JVERSION, $this->minimumJoomla, '<')) {
+            Factory::getApplication()->enqueueMessage(sprintf(Text::_('JLIB_INSTALLER_MINIMUM_JOOMLA'), $this->minimumJoomla), 'error');
 
             return false;
         }
 
         return true;
     }
-}
+
+    /**
+     * Function called after extension installation/update/removal procedure commences.
+     *
+     * @param   string            $type     The type of change (install or discover_install, update, uninstall)
+     * @param   InstallerAdapter  $adapter  The adapter calling this method
+     *
+     * @return  boolean  True on success
+     *
+     * @since   2.0.0
+     */
+    public function postflight(string $type, InstallerAdapter $adapter)
+    : bool
+    {
+        return true;
+    }
+};
