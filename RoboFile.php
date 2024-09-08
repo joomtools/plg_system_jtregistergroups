@@ -8,69 +8,78 @@
  * @see http://robo.li/
  */
 
+use Joomla\Jorobo\Tasks\Build;
+use Joomla\Jorobo\Tasks\CopyrightHeader;
 use Joomla\Jorobo\Tasks\loadTasks;
+use Joomla\Jorobo\Tasks\Map;
+use Robo\Tasks;
 
-if (!defined('JPATH_BASE'))
-{
-	define('JPATH_BASE', __DIR__);
+if (!defined('JPATH_BASE')) {
+    define('JPATH_BASE', __DIR__);
 }
 
 // PSR-4 Autoload by composer
 require_once JPATH_BASE . '/vendor/autoload.php';
 
-class RoboFile extends \Robo\Tasks
+class RoboFile extends Tasks
 {
-	// Load tasks from composer, see composer.json
-	//use \joomla_projects\robo\loadTasks;
-	//use \Joomla\Jorobo\Tasks\loadTasks;
-	use loadTasks;
+    // Load tasks from composer, see composer.json
+    //use \joomla_projects\robo\loadTasks;
+    //use \Joomla\Jorobo\Tasks\loadTasks;
+    use loadTasks;
 
-	/**
-	 * Initialize Robo
-	 */
-	public function __construct()
-	{
-		$this->stopOnFail(false);
-	}
+    /**
+     * Initialize Robo
+     */
+    public function __construct()
+    {
+        $this->stopOnFail(false);
+    }
 
-	/**
-	 * Build the joomla extension package
-	 *
-	 * @param   array  $params  Additional params
-	 *
-	 * @return  void
-	 */
-	public function build($params = ['dev' => false])
-	{
-		if (!file_exists('jorobo.ini'))
-		{
-			$this->_copy('jorobo.dist.ini', 'jorobo.ini');
-		}
+    /**
+     * Build the joomla extension package
+     *
+     * @param   array  $params  Additional params
+     *
+     * @return  void
+     */
+    public function build($params = ['dev' => false])
+    {
+        if (!file_exists('jorobo.ini')) {
+            $this->_copy('jorobo.dist.ini', 'jorobo.ini');
+        }
 
-		//$this->taskBuild($params)->run();
-		(new \Joomla\Jorobo\Tasks\Build($params))->run();
-	}
+        //$this->taskBuild($params)->run();
+        (new Build($params))->run();
 
-	/**
-	 * Update copyright headers for this project. (Set the text up in the jorobo.ini)
-	 *
-	 * @return  void
-	 */
-	public function headers()
-	{
-		(new \Joomla\Jorobo\Tasks\CopyrightHeader())->run();
-	}
+        $this->say('');
+        $this->say('Checksums for Updateserver:');
+        $this->say('');
+        $this->_exec('sha256sum ' . 'dist/plg-jtregistergroups-current.zip');
+        $this->_exec('sha512sum ' . 'dist/plg-jtregistergroups-current.zip');
+        $this->say('');
+    }
 
-	/**
-	 * Symlink projectfiles from source into target
-	 *
-	 * @param   string  $target  Absolute path to Joomla! root
-	 *
-	 * @return   void
-	 */
-	public function map($target)
-	{
-		//$this->taskMap($target)->run();
-		(new \Joomla\Jorobo\Tasks\Map($target))->run();
-	}
+    /**
+     * Update copyright headers for this project. (Set the text up in the jorobo.ini)
+     *
+     * @return  void
+     */
+    public function headers()
+    {
+        (new CopyrightHeader())->run();
+    }
+
+    /**
+     * Symlink projectfiles from source into target
+     *
+     * @param   string  $target  Absolute path to Joomla! root
+     *
+     * @return   void
+     */
+    public function map($target)
+    {
+        //$this->taskMap($target)->run();
+        (new Map($target))->run();
+    }
 }
