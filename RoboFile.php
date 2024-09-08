@@ -7,6 +7,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+use Joomla\Jorobo\Tasks\JTask;
 use Joomla\Jorobo\Tasks\Tasks;
 use Robo\Symfony\ConsoleIO;
 
@@ -26,9 +27,11 @@ require_once JPATH_BASE . '/vendor/autoload.php';
  *
  * @since   1.0.0
  */
-class RoboFile extends \Robo\Tasks
+class RoboFile extends JTask
 {
     use Tasks;
+
+    public function run(){}
 
     /**
      * Initialize Robo
@@ -60,6 +63,16 @@ class RoboFile extends \Robo\Tasks
     public function build(ConsoleIO $io, $params = ['dev' => false, 'base' => JPATH_BASE])
     {
         $this->task(\Joomla\Jorobo\Tasks\Build::class, $params)->run();
+
+        $symlinkFileBase = $params['base'] . '/dist/'
+            . $this->getJConfig()->zip_prefix . $this->getJConfig()->extension;
+
+        $this->say('');
+        $this->say('Checksums for Updateserver:');
+        $this->say('');
+        $this->_exec('sha256sum ' . $symlinkFileBase . '-current.zip');
+        $this->_exec('sha512sum ' . $symlinkFileBase . '-current.zip');
+        $this->say('');
     }
 
     /**
