@@ -36,7 +36,27 @@
 		<sha256>5ce0e2403d9b5f9d3a7943671e9aaf5b2a3c60d2f88616b559104c80439dc589</sha256>
 		<sha512>bc2c0effd868594851695cdf7b6a100437e048a63408ec3d6fc7ff185a755399dcd7958c4b8f6608c348788785ea84f85592862f82d9f2b01ac8a0e704de8a88</sha512>
 		<maintainer>Guido De Gobbis</maintainer>
-		<targetplatform name="joomla" version="4\.[0123456789]"/>
+		<targetplatform name="joomla" version="(4|5)"/>
 		<php_minimum>7.2</php_minimum>
+	</update>
+	<update>
+		<name>JT - Register groups</name>
+		<description></description>
+		<element>jtregistergroups</element>
+		<type>plugin</type>
+		<folder>system</folder>
+		<client>site</client>
+		<version>2.0.1</version>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/joomtools/plg_system_jtregistergroups/releases/download/2.0.1/plg_system_jtregistergroups-2.0.1.zip</downloadurl>
+		</downloads>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<sha256>58b873d7ba0bc5186ba2c10c055a3171479459548464da880938fabcf3c410db</sha256>
+		<sha512>222d1512bc42ceaae2ec1b1b0d30cd398136fde357cd6f48eba9f9018b97aec38347983a6998dcd6ce7c725548875ad4e9e505084502c264f5b3925beabe57c7</sha512>
+		<maintainer>Guido De Gobbis</maintainer>
+		<targetplatform name="joomla" version="5"/>
+		<php_minimum>8.1</php_minimum>
 	</update>
 </updates>

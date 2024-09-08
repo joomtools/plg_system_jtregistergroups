@@ -1,7 +1,11 @@
-# JT -Registergroups
+# JT -RegisterGroups
 
-#### Joomla - System-Plugin ([Download](https://github.com/JoomTools/plg_system_jtregistergroups/releases))
-min. Joomla 3.9 + PHP 7.2
+#### Joomla - System-Plugin  
+[![Joomla 3.10 / 4.x - native](https://img.shields.io/badge/Joomla™-3.10_/_4.x_and_5.x_native-darkgreen?logo=joomla&logoColor=c2c9d6&style=for-the-badge)](https://downloads.joomla.org/cms) ![PHP7.2](https://img.shields.io/badge/PHP->=7.2-darkgreen?logo=php&style=for-the-badge)  
+[![Download - v1.0.6 EOL](https://img.shields.io/badge/Download_v1.0.6-EOL-darkred)](https://github.com/joomtools/plg_system_jtregistergroups/releases/download/1.0.6/plg_system_jtregistergroups-1.0.6.zip)  
+-------------------------------------------------------  
+[![Joomla 5 - native](https://img.shields.io/badge/Joomla™-5.x_native-darkgreen?logo=joomla&logoColor=c2c9d6&style=for-the-badge)](https://downloads.joomla.org/cms) ![PHP8.1](https://img.shields.io/badge/PHP->=8.1-darkgreen?logo=php&style=for-the-badge)  
+[![Download lates](https://img.shields.io/badge/Download-latest-darkgreen)](https://github.com/joomtools/plg_system_jtregistergroups/releases/latest)
 
 ### Beschreibung / Description
 <details>
@@ -52,7 +56,7 @@ In the plugin settings you can define which groups can be set later in the menu 
 
 
 ### Menu item settings
-The menu item must be of the type `Users -> Registration Form`, so that the tab `JT - Registergroups` can be selected. Here you can select one of the groups, that was previously defined in the plugin settings. Each menu item can only be assigned to one group.
+The menu item must be of the type `Users -> Registration Form`, so that the tab `JT - RegisterGroups` can be selected. Here you can select one of the groups, that was previously defined in the plugin settings. Each menu item can only be assigned to one group.
 The newly registered user is automatically assigned to the selected group, therefore please note the warning under [Attention](#attention).
 
 
