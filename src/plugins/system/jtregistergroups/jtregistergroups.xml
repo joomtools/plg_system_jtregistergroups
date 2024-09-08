@@ -3,8 +3,8 @@
 	<name>PLG_SYSTEM_JTREGISTERGROUPS</name>
 	<author>Guido De Gobbis</author>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) JoomTools. All rights reserved.</copyright>
-	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
+	<copyright>2018 JoomTools. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or later.</license>
 	<authorEmail>support@joomtools.de</authorEmail>
 	<authorUrl>https://github.com/joomtools/plg_system_jtregistergroups</authorUrl>
 	<version>##VERSION##</version>
@@ -29,6 +29,6 @@
 		</fields>
 	</config>
 	<updateservers>
-		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/master/update.xml</server>
+		<server type="extension" priority="1" name="PLG_SYSTEM_JTREGISTERGROUPS">https://raw.githubusercontent.com/joomtools/plg_system_jtregistergroups/1.x/update.xml</server>
 	</updateservers>
 </extension>

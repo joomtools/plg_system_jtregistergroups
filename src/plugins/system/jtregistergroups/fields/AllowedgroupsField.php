@@ -1,7 +1,7 @@
 <?php
 /**
  * @package      Joomla.Plugin
- * @subpackage   System.Jtregistergroups
+ * @subpackage   System.JtRegisterGroups
  *
  * @author       Guido De Gobbis <support@joomtools.de>
  * @copyright    2018 JoomTools.de - All rights reserved.
