@@ -1,7 +1,7 @@
-# JT -Registergroups
+# JT -RegisterGroups
 
 #### Joomla - System-Plugin ([Download](https://github.com/JoomTools/plg_system_jtregistergroups/releases))
-min. Joomla 3.9 + PHP 7.2
+[![Joomla 5 - native](https://img.shields.io/badge/Joomla™-5.x_native-darkgreen?logo=joomla&logoColor=c2c9d6&style=for-the-badge)](https://downloads.joomla.org/cms) ![PHP8.1](https://img.shields.io/badge/PHP->=8.1-darkgreen?logo=php&style=for-the-badge)
 
 ### Beschreibung / Description
 <details>
@@ -21,7 +21,7 @@ In den Plugin-Einstellungen kann man definieren, welche Gruppen später in den M
 
 
 ### Menüpunkt-Einstellungen
-Der Menüpunkt muss vom Typ `Benutzer -> Registrierungsformular` sein, damit der Tab `JT - Registergroups` auswählbar ist. Hier kann man eine Gruppe auswählen, welche vorher in den Plugin-Einstellungen definiert wurde. Jedem Menüpunkt kann nur eine Gruppe zugewiesen werden.  
+Der Menüpunkt muss vom Typ `Benutzer -> Registrierungsformular` sein, damit der Tab `JT - RegisterGroups` auswählbar ist. Hier kann man eine Gruppe auswählen, welche vorher in den Plugin-Einstellungen definiert wurde. Jedem Menüpunkt kann nur eine Gruppe zugewiesen werden.  
 Der neu registrierte Benutzer wird automatisch der vorher hinterlegten Gruppe zugewiesen, dashalb bitte den Warnhinweis unter [Achtung](#achtung) beachten.
 
 
@@ -52,7 +52,7 @@ In the plugin settings you can define which groups can be set later in the menu 
 
 
 ### Menu item settings
-The menu item must be of the type `Users -> Registration Form`, so that the tab `JT - Registergroups` can be selected. Here you can select one of the groups, that was previously defined in the plugin settings. Each menu item can only be assigned to one group.
+The menu item must be of the type `Users -> Registration Form`, so that the tab `JT - RegisterGroups` can be selected. Here you can select one of the groups, that was previously defined in the plugin settings. Each menu item can only be assigned to one group.
 The newly registered user is automatically assigned to the selected group, therefore please note the warning under [Attention](#attention).
 
 

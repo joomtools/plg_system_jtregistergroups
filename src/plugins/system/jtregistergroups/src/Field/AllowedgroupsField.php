@@ -23,7 +23,7 @@ use Joomla\Registry\Registry;
 
 /**
  * Class to show allowed groups in menu item
- * selected in plugin params
+ * selected in plugin params.
  *
  * @since  1.0.0
  */

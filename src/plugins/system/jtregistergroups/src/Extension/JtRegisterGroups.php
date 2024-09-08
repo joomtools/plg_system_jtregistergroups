@@ -24,16 +24,16 @@ use Joomla\Event\SubscriberInterface;
 
 /**
  * Class to register user to selected group
- * using individual custom field for each group
+ * using individual custom field for each group.
  *
- * @since  1.0.0
+ * @since  2.0.0
  */
 final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
 {
     /**
      * Load the language file on instantiation.
      *
-     * @var    boolean
+     * @var    bool
      * @since  1.0.0
      */
     protected $autoloadLanguage = true;
@@ -42,7 +42,6 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
      * Returns an array of events this subscriber will listen to.
      *
      * @return  array
-     *
      * @since   2.0.0
      */
     public static function getSubscribedEvents()
@@ -56,9 +55,9 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Runs on content preparation
+     * Runs on content preparation.
      *
-     * @param   Model\PrepareDataEvent  $event  Event instance
+     * @param   Model\PrepareDataEvent  $event  Event instance.
      *
      * @return  void
      * @since   1.0.0
@@ -94,9 +93,9 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Adds additional fields to the user editing form
+     * Adds additional fields to the user editing form.
      *
-     * @param   Model\PrepareFormEvent  $event  Event instance
+     * @param   Model\PrepareFormEvent  $event  Event instance.
      *
      * @return  void
      * @since   1.0.0
@@ -130,9 +129,9 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Remove not needed custom fields
+     * Remove not needed custom fields.
      *
-     * @param   CustomFields\PrepareDomEvent  $event  Event instance
+     * @param   CustomFields\PrepareDomEvent  $event  Event instance.
      *
      * @return  void
      * @since   1.0.0
@@ -183,7 +182,7 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Get group set in menuitem
+     * Get group set in menuitem.
      *
      * @return  null|string  Selected group.
      * @since   1.0.0
@@ -201,7 +200,7 @@ final class JtRegisterGroups extends CMSPlugin implements SubscriberInterface
     }
 
     /**
-     * Get groups set to users
+     * Get groups set to users.
      *
      * @param   string  $context  The context for the data.
      *
