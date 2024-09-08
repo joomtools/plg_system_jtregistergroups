@@ -35,10 +35,12 @@ return new class () implements ServiceProviderInterface {
         $container->set(
             PluginInterface::class,
             function (Container $container) {
+                $dispatcher = $container->get(DispatcherInterface::class);
                 $plugin     = new JtRegisterGroups(
-                    $container->get(DispatcherInterface::class),
+                    $dispatcher,
                     (array) PluginHelper::getPlugin('system', 'jtregistergroups')
                 );
+
                 $plugin->setApplication(Factory::getApplication());
 
                 return $plugin;
